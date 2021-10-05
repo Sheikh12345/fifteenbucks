@@ -26,7 +26,7 @@ class _LikeProductScreenState extends State<LikeProductScreen> {
       body: ListView.builder(itemBuilder: (context, index) {
         return Container(
           height: size.height * 0.14,
-          margin: EdgeInsets.symmetric(vertical: 5),
+          margin: const EdgeInsets.symmetric(vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

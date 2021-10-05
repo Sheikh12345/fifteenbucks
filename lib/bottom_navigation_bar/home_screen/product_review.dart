@@ -90,7 +90,7 @@ fontSize: size.width*0.06,
           ],
         ),
         bottomNavigationBar: Container(
-          margin: EdgeInsets.only(bottom: 20,left: 20),
+          margin: const EdgeInsets.only(bottom: 20,left: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
