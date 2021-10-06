@@ -31,9 +31,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Container(
                     width: size.width * 0.3,
                     height: size.width * 0.3,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Colors.white,
                       shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: NetworkImage('https://i.pinimg.com/564x/38/20/2b/38202b63306e78378c74631fffb7f0ee.jpg')
+                      )
                     ),
                   ),
                   SizedBox(
@@ -113,12 +116,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                   ),
-                  Text(
-                    'Logout',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: size.width * 0.05,
-                      color: Colors.black,
+                  InkWell(
+                    onTap: (){
+                      FirebaseAuth.instance.signOut().whenComplete((){
+                        screenPushRep(context, const LoginScreen());
+                      });
+                    },
+                    child: Text(
+                      'Logout',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: size.width * 0.05,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ],

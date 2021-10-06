@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fifteenbucks/styles/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,70 +25,87 @@ class _LikeProductScreenState extends State<LikeProductScreen> {
               GoogleFonts.cabin(color: Colors.red, fontWeight: FontWeight.w600),
         ),
       ),
-      body: ListView.builder(itemBuilder: (context, index) {
-        return Container(
-          height: size.height * 0.14,
-          margin: const EdgeInsets.symmetric(vertical: 5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                height: size.height * 0.13,
-                width: size.width * 0.25,
-                decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(20),
-                    image: const DecorationImage(
-                        image: NetworkImage(
-                            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZHVjdHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80'),
-                        fit: BoxFit.fill)),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: size.height * 0.02,
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid.toString())
+            .collection('favorite')
+            .snapshots(),
+        builder: (context, AsyncSnapshot snapshot) {
+          if(snapshot.hasData){
+            return ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    height: size.height * 0.14,
+                    margin: const EdgeInsets.symmetric(vertical: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          height: size.height * 0.13,
+                          width: size.width * 0.25,
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                    snapshot.data.docs[index]['image']),
+                                  fit: BoxFit.fill)),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 5),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: size.height * 0.02,
+                              ),
+                              Text(
+                                snapshot.data.docs[index]['name'].toString().substring(0,10),
+                                style: GoogleFonts.cabin(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                height: size.height * 0.04,
+                              ),
+
+                              SizedBox(
+                                height: size.height * 0.01,
+                              ),
+                              Text(
+                                snapshot.data.docs[index]['price'].toString(),
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          ),
+                          onPressed: () {
+                            FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid)
+                                .collection('favorite').doc(snapshot.data.docs[index].id).delete();
+                          },
+                        ),
+                      ],
                     ),
-                    Text(
-                      "Warm Zipper",
-                      style: GoogleFonts.cabin(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(
-                      height: size.height * 0.01,
-                    ),
-                    Text(
-                      "Hooded jacket",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    SizedBox(
-                      height: size.height * 0.01,
-                    ),
-                    Text(
-                      "\$300.00",
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                ),
-                onPressed: () {},
-              ),
-            ],
-          ),
-        );
-      }),
+                  );
+                });
+          }else{
+            return const Center(
+              child:CircularProgressIndicator()
+            );
+          }
+        },
+      ),
     );
   }
 }

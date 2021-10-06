@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 
 import 'bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'common/navgation_fun.dart';
@@ -81,8 +82,8 @@ class _SplashScreeState extends State<SplashScreen> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
+      backgroundColor: AppConstants().primaryColor,
+      body: SizedBox(
         width: size.width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -92,27 +93,27 @@ class _SplashScreeState extends State<SplashScreen> {
               height: size.height * 0.03,
             ),
             Container(
-              padding: EdgeInsets.only(left: size.width * 0.08),
-              width: size.width,
-              alignment: Alignment.center,
-              child: AnimatedTextKit(
-                animatedTexts: [
-                  TypewriterAnimatedText(
-                    '15 bucks',
-                    textStyle: GoogleFonts.courgette(
+                padding: EdgeInsets.only(left: size.width * 0.08),
+                width: size.width,
+                alignment: Alignment.center,
+                child: Shimmer(
+                  duration: const Duration(seconds: 1), //Default value
+                  interval: const Duration(
+                      seconds: 1), //Default value: Duration(seconds: 0)
+                  color: Colors.red, //Default value
+                  colorOpacity: 1, //Default value
+                  enabled: true, //Default value
+                  direction:
+                      const ShimmerDirection.fromLeftToRight(), //Default Value
+                  child: Text(
+                    '15 Bucks',
+                    style: GoogleFonts.aclonica(
                         letterSpacing: 1,
-                        color: AppConstants().primaryColor,
+                        color: Colors.white,
                         fontWeight: FontWeight.w600,
                         fontSize: size.width * 0.09),
-                    speed: const Duration(milliseconds: 150),
                   ),
-                ],
-                totalRepeatCount: 1,
-                pause: const Duration(milliseconds: 600),
-                displayFullTextOnTap: false,
-                stopPauseOnTap: false,
-              ),
-            ),
+                )),
             SizedBox(
               height: size.height * 0.04,
             ),
@@ -126,7 +127,7 @@ class _SplashScreeState extends State<SplashScreen> {
     final storage = GetStorage();
 
     try {
-      Future.delayed(const Duration(seconds: 4), () {
+      Future.delayed(const Duration(seconds: 5), () {
         if (FirebaseAuth.instance.currentUser == null) {
           screenPushRep(context, const LoginScreen());
         } else {

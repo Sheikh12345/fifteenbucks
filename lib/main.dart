@@ -1,5 +1,5 @@
 import 'package:camera/camera.dart';
-import 'package:fifteenbucks/cubit/products_cubit/products_cubit.dart';
+import 'package:fifteenbucks/bloc/products_cubit/products_cubit.dart';
 import 'package:fifteenbucks/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

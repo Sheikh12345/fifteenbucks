@@ -51,7 +51,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
               label: 'Cart'),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.add,
+                Icons.favorite,
                 color: AppConstants().primaryColor,
               ),
               label: 'Heart'),

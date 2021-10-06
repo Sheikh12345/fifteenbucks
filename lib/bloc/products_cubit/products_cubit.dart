@@ -7,14 +7,14 @@ part 'products_state.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
   ProductsCubit() : super(ProductsInitial());
-  
-  
-  getProducts()async{
+
+  getProducts(String type) async {
     emit(ProductsLoading());
-    ProductModel productModel = await  Server().getProducts('watches');
-    if(productModel.products !=null){
+    print("get Products");
+    ProductModel productModel = await Server().getProducts(type);
+    if (productModel.products != null) {
       emit(ProductsSuccessState(productModel));
-    }else{
+    } else {
       emit(ProductsFailedState());
     }
   }

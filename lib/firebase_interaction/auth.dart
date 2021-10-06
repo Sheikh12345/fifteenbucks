@@ -1,3 +1,4 @@
+import 'package:fifteenbucks/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:fifteenbucks/common/functions.dart';
 import 'package:fifteenbucks/common/navgation_fun.dart';
 import 'package:fifteenbucks/bottom_navigation_bar/home_screen/home_screen.dart';
@@ -56,7 +57,7 @@ class AuthOperations {
       if (userCredential.user != null) {
         User? user = FirebaseAuth.instance.currentUser;
 
-            screenPushRep(context, const HomeScreen());
+            screenPushRep(context, const CustomBottomNavigation());
           Fluttertoast.showToast(
               msg: 'Welcome back.', backgroundColor: Colors.red);
       } else {
