@@ -142,13 +142,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                           color: Colors.black,
                                         ),
                                         children: [TextSpan(text: '${state.productModel.products![index].productName}')])),
+
                                 RichText(
                                     text:  TextSpan(
                                         text: 'Price: ',
                                         style: TextStyle(
                                           color: Colors.black,
                                         ),
-                                        children: [TextSpan(text: '${state.productModel.products![index].productPrice}')]))
+                                        children: [TextSpan(text: '${state.productModel.products![index].productPrice}')])),
+
                               ],
                             ),
                           ),
