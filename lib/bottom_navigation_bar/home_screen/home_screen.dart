@@ -106,14 +106,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   margin: const EdgeInsets.only(top: 5),
                   height: size.height * 0.57,
                   child: GridView.builder(
-                    itemCount: state.productModel.products!.length,
+                      itemCount: state.productModel.products!.length,
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           mainAxisSpacing: 1.0,
                           crossAxisSpacing: 5.0,
-                          childAspectRatio: .7),
+                          childAspectRatio: .4),
                       itemBuilder: (context, index) {
-                      print('${state.productModel.products![0].productImage}');
+                        print('${state.productModel.products![0].productImage}');
                         return InkWell(
                           onTap: () {
                             screenPush(context, const ProductViewScreen());
@@ -123,24 +123,32 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+
                                 Container(
                                   width: size.width * 0.6,
                                   height: size.height * 0.26,
                                   decoration: BoxDecoration(
                                       image:  DecorationImage(
-                                        image: NetworkImage(
-                                            state.productModel.products![0].productImage.toString().replaceAll('_.webp', '')),
+                                        image: NetworkImage('https:${state.productModel.products![index].productImage.toString()}'),
                                         fit: BoxFit.fill,
                                       ),
                                       borderRadius: BorderRadius.circular(20)),
                                 ),
+
                                 RichText(
-                                    text: const TextSpan(
+                                    text:  TextSpan(
+                                        text: '',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                        children: [TextSpan(text: '${state.productModel.products![index].productName}')])),
+                                RichText(
+                                    text:  TextSpan(
                                         text: 'Price: ',
                                         style: TextStyle(
                                           color: Colors.black,
                                         ),
-                                        children: [TextSpan(text: '9000')]))
+                                        children: [TextSpan(text: '${state.productModel.products![index].productPrice}')]))
                               ],
                             ),
                           ),
