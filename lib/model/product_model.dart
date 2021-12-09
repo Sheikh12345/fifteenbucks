@@ -52,7 +52,7 @@ class Products {
       String? productName, 
       String? productUrl, 
       String? productImage, 
-      String? productPrice,}){
+      dynamic? productPrice,}){
     _productName = productName;
     _productUrl = productUrl;
     _productImage = productImage;
@@ -68,12 +68,12 @@ class Products {
   String? _productName;
   String? _productUrl;
   String? _productImage;
-  String? _productPrice;
+  dynamic? _productPrice;
 
   String? get productName => _productName;
   String? get productUrl => _productUrl;
   String? get productImage => _productImage;
-  String? get productPrice => _productPrice;
+  dynamic? get productPrice => _productPrice;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

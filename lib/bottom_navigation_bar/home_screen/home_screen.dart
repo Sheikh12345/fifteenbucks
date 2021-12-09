@@ -123,19 +123,22 @@ class _HomeScreenState extends State<HomeScreen> {
                               '${state.productModel.products![0].productImage}');
                           return InkWell(
                             onTap: () {
+                              print(
+                                  "https:${state.productModel.products![index].productImage.toString()}");
                               screenPush(
                                   context,
                                   ProductViewScreen(
-                                    image:
-                                        'https:${state.productModel.products![index].productImage.toString()}',
-                                    price: state.productModel.products![index]
-                                        .productPrice
-                                        .toString(),
-                                    name: state.productModel.products![index]
-                                        .productName
-                                        .toString(),
-                                    productUrl: state.productModel.products![index].productUrl.toString()
-                                  ));
+                                      image:
+                                          'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2-4-1633383922.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
+                                      price: state.productModel.products![index]
+                                          .productPrice
+                                          .toString(),
+                                      name: state.productModel.products![index]
+                                          .productName
+                                          .toString(),
+                                      productUrl: state.productModel
+                                          .products![index].productUrl
+                                          .toString()));
                             },
                             child: Container(
                               margin: EdgeInsets.symmetric(
@@ -149,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: NetworkImage(
-                                              'https:${state.productModel.products![index].productImage.toString()}'),
+                                              'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2-4-1633383922.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*'),
                                           fit: BoxFit.fill,
                                         ),
                                         borderRadius:
