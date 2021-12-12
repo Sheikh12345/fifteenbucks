@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -30,7 +29,7 @@ class _SignUpState extends State<SignUp> {
         child: Container(
           width: size.width,
           height: size.height,
-          margin: EdgeInsets.symmetric(horizontal: size.width*0.1),
+          margin: EdgeInsets.symmetric(horizontal: size.width * 0.1),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -92,14 +91,13 @@ class _SignUpState extends State<SignUp> {
                   child: Container(
                       decoration: BoxDecoration(
                           color: AppConstants().primaryColor,
-                          borderRadius: BorderRadius.circular(40)
-                      ),
+                          borderRadius: BorderRadius.circular(40)),
                       padding: EdgeInsets.symmetric(
                           horizontal: size.width * 0.05,
                           vertical: size.height * 0.017),
                       alignment: Alignment.center,
-                      margin: EdgeInsets.only(top: size.height * 0.02,
-                          left: size.width*0.4),
+                      margin: EdgeInsets.only(
+                          top: size.height * 0.02, left: size.width * 0.4),
                       width: size.width * 0.8,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -112,15 +110,15 @@ class _SignUpState extends State<SignUp> {
                                 fontSize: size.width * 0.043),
                           ),
                           SizedBox(
-                            width: size.width*0.02,
+                            width: size.width * 0.02,
                           ),
-                          Icon(Icons.arrow_forward_ios,
+                          Icon(
+                            Icons.arrow_forward_ios,
                             color: Colors.white,
-                            size: size.width*0.04,
+                            size: size.width * 0.04,
                           )
                         ],
-                      )
-                  ),
+                      )),
                 ),
               ),
             ],
@@ -130,29 +128,33 @@ class _SignUpState extends State<SignUp> {
       bottomNavigationBar: Container(
         margin: EdgeInsets.only(bottom: 20),
         child: InkWell(
-          onTap: (){
+          onTap: () {
             goBackPreviousScreen(context);
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Already have an account?",style: TextStyle(
-                color: Colors.grey.shade600,
-                fontWeight: FontWeight.w600,
-              ),),
+              Text(
+                "Already have an account?",
+                style: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               SizedBox(
                 width: 10,
               ),
-              Text("Sign in",style: GoogleFonts.cabin(
-                  color: AppConstants().primaryColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: size.width*0.045
-              ),),
+              Text(
+                "Sign in",
+                style: GoogleFonts.cabin(
+                    color: AppConstants().primaryColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: size.width * 0.045),
+              ),
             ],
           ),
         ),
       ),
-
     ));
   }
 
@@ -171,5 +173,4 @@ class _SignUpState extends State<SignUp> {
           _controllerPassword.text, _controllerfullName.text);
     }
   }
-
 }

@@ -83,11 +83,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 InkWell(
-                   onTap: (){
-                    screenPush(context,ForgotScreen());
+                  onTap: () {
+                    screenPush(context, ForgotScreen());
                   },
                   child: Container(
-                    margin: EdgeInsets.only(top: size.height*0.01),
+                    margin: EdgeInsets.only(top: size.height * 0.01),
                     width: size.width,
                     alignment: Alignment.bottomRight,
                     child: Text(

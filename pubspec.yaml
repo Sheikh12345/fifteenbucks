@@ -50,7 +50,6 @@ dependencies:
   cached_network_image: ^3.1.0
   image_picker: ^0.8.4
   permission_handler: ^8.1.4+2
-  camera: ^0.9.2+2
   google_ml_vision: ^0.0.7
   http: ^0.13.3
   carousel_slider: ^4.0.0

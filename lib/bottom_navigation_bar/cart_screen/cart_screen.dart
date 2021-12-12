@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fifteenbucks/common/functions.dart';
 import 'package:fifteenbucks/common/navgation_fun.dart';
+import 'package:fifteenbucks/model/cart_model.dart';
 import 'package:fifteenbucks/styles/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,62 @@ class _CartScreenState extends State<CartScreen> {
   String? imageUrl;
   String? price;
   String? productName;
+  double totalPrice = 0.0;
+  List<Map> products = [];
+
+  final CollectionReference _fetchProducts = FirebaseFirestore.instance
+      .collection('users')
+      .doc(FirebaseAuth.instance.currentUser!.uid.toString())
+      .collection('cart');
+
+  calculateAmount(AsyncSnapshot snapshot) {
+    totalPrice = 0.0;
+    for (int i = 0; i < snapshot.data.docs.length; i++) {
+      totalPrice = totalPrice +
+          double.parse(snapshot.data.docs[i]['price'].toString()) +
+          double.parse(snapshot.data.docs[i]['quantity'].toString());
+    }
+    print("total price $totalPrice");
+  }
+
+  getProductList() async {
+    final List<String> _fireDocsList = [];
+    QuerySnapshot querySnapshotLens = await _fetchProducts.get();
+
+    for (int i = 0; i < querySnapshotLens.docs.length; i++) {
+      var a = querySnapshotLens.docs[i];
+      _fireDocsList.add(a.id);
+    }
+
+    for (int index = 0; index < _fireDocsList.length; index++) {
+      await _fetchProducts
+          .doc(_fireDocsList.elementAt(index))
+          .get()
+          .then((value) {
+        products.add({
+          "productName": value.get('name'),
+          "productPrice":
+              '${double.parse(value.get('price')) + value.get('quantity')}',
+          "productImage": value.get('image'),
+          "productUrl": value.get('productUrl')
+        });
+      }).whenComplete(() {
+        if (products.isNotEmpty) {
+          Future.delayed(Duration(seconds: 1), () {
+            screenPush(
+              context,
+              OrderPlaceScreen(
+                list: products,
+              ),
+            );
+          });
+        } else {
+          showSnackBarFailed(context, 'Cart is empty');
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -41,6 +98,7 @@ class _CartScreenState extends State<CartScreen> {
             .snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
+            calculateAmount(snapshot);
             return ListView.builder(
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
@@ -82,7 +140,7 @@ class _CartScreenState extends State<CartScreen> {
                                 height: size.height * 0.03,
                               ),
                               Text(
-                                snapshot.data.docs[index]['price'].toString(),
+                                "\$ ${snapshot.data.docs[index]['price'].toString()}",
                                 style: const TextStyle(
                                   color: Colors.red,
                                   fontWeight: FontWeight.w600,
@@ -116,7 +174,7 @@ class _CartScreenState extends State<CartScreen> {
                                     onTap: () {
                                       if (snapshot.data.docs[index]
                                               ['quantity'] >=
-                                          1) {
+                                          2) {
                                         FirebaseFirestore.instance
                                             .collection('users')
                                             .doc(FirebaseAuth
@@ -127,7 +185,35 @@ class _CartScreenState extends State<CartScreen> {
                                             .update({
                                           'quantity': (snapshot.data.docs[index]
                                                   ['quantity'] -
-                                              1)
+                                              1),
+                                        }).whenComplete(() {
+                                          Future.delayed(
+                                              Duration(milliseconds: 1000), () {
+                                            FirebaseFirestore.instance
+                                                .collection('users')
+                                                .doc(FirebaseAuth
+                                                    .instance.currentUser!.uid
+                                                    .toString())
+                                                .collection('cart')
+                                                .doc(snapshot
+                                                    .data.docs[index].id)
+                                                .update({
+                                              'totalPrice': (double.parse(
+                                                          snapshot
+                                                              .data
+                                                              .docs[index]
+                                                                  ['price']
+                                                              .toString()) *
+                                                      double.parse(snapshot
+                                                          .data
+                                                          .docs[index]
+                                                              ['quantity']
+                                                          .toString()))
+                                                  .toString()
+                                            });
+                                          }).whenComplete(() {
+                                            calculateAmount(snapshot);
+                                          });
                                         });
                                       }
                                     },
@@ -178,7 +264,30 @@ class _CartScreenState extends State<CartScreen> {
                                           .update({
                                         'quantity': (snapshot.data.docs[index]
                                                 ['quantity'] +
-                                            1)
+                                            1),
+                                      }).whenComplete(() {
+                                        Future.delayed(
+                                            Duration(milliseconds: 1000), () {
+                                          FirebaseFirestore.instance
+                                              .collection('users')
+                                              .doc(FirebaseAuth
+                                                  .instance.currentUser!.uid
+                                                  .toString())
+                                              .collection('cart')
+                                              .doc(snapshot.data.docs[index].id)
+                                              .update({
+                                            'totalPrice': (double.parse(snapshot
+                                                        .data
+                                                        .docs[index]['price']
+                                                        .toString()) *
+                                                    double.parse(snapshot.data
+                                                        .docs[index]['quantity']
+                                                        .toString()))
+                                                .toString()
+                                          }).whenComplete(() {
+                                            calculateAmount(snapshot);
+                                          });
+                                        });
                                       });
                                     },
                                     child: Container(
@@ -222,19 +331,7 @@ class _CartScreenState extends State<CartScreen> {
       ),
       bottomNavigationBar: InkWell(
         onTap: () {
-          if (productUrl != null) {
-            screenPush(
-              context,
-              OrderPlaceScreen(
-                productName: productName.toString(),
-                productUrl: productUrl.toString(),
-                price: price.toString(),
-                image: imageUrl.toString(),
-              ),
-            );
-          } else {
-            showSnackBarFailed(context, 'Click on add and then try');
-          }
+          getProductList();
         },
         child: Container(
           height: size.height * 0.07,

@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fifteenbucks/bottom_navigation_bar/home_screen/product_review.dart';
+import 'package:fifteenbucks/common/functions.dart';
+import 'package:fifteenbucks/common/navgation_fun.dart';
 import 'package:fifteenbucks/styles/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +35,7 @@ class _LikeProductScreenState extends State<LikeProductScreen> {
             .collection('favorite')
             .snapshots(),
         builder: (context, AsyncSnapshot snapshot) {
-          if(snapshot.hasData){
+          if (snapshot.hasData) {
             return ListView.builder(
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
@@ -50,7 +53,7 @@ class _LikeProductScreenState extends State<LikeProductScreen> {
                               borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(
                                   image: NetworkImage(
-                                    snapshot.data.docs[index]['image']),
+                                      snapshot.data.docs[index]['image']),
                                   fit: BoxFit.fill)),
                         ),
                         Container(
@@ -62,7 +65,9 @@ class _LikeProductScreenState extends State<LikeProductScreen> {
                                 height: size.height * 0.02,
                               ),
                               Text(
-                                snapshot.data.docs[index]['name'].toString().substring(0,10),
+                                snapshot.data.docs[index]['name']
+                                    .toString()
+                                    .substring(0, 10),
                                 style: GoogleFonts.cabin(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
@@ -71,7 +76,6 @@ class _LikeProductScreenState extends State<LikeProductScreen> {
                               SizedBox(
                                 height: size.height * 0.04,
                               ),
-
                               SizedBox(
                                 height: size.height * 0.01,
                               ),
@@ -85,24 +89,63 @@ class _LikeProductScreenState extends State<LikeProductScreen> {
                             ],
                           ),
                         ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          ),
-                          onPressed: () {
-                            FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid)
-                                .collection('favorite').doc(snapshot.data.docs[index].id).delete();
-                          },
-                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                              ),
+                              onPressed: () {
+                                FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .collection('favorite')
+                                    .doc(snapshot.data.docs[index].id)
+                                    .delete();
+                              },
+                            ),
+                            InkWell(
+                              onTap: () {
+                                FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .collection('cart')
+                                    .add({
+                                  'image': snapshot.data.docs[index]['image']
+                                      .toString(),
+                                  'price': snapshot.data.docs[index]['price']
+                                      .toString(),
+                                  'totalPrice': snapshot
+                                      .data.docs[index]['price']
+                                      .toString(),
+                                  'name': snapshot.data.docs[index]['name']
+                                      .toString(),
+                                  'productUrl': snapshot
+                                      .data.docs[index]['productUrl']
+                                      .toString(),
+                                  'quantity': 1
+                                }).whenComplete(() {
+                                  showSnackBarSuccess(context, 'Added to cart');
+                                });
+                              },
+                              child: Text(
+                                "Add to\ncart",
+                                style: GoogleFonts.rubik(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: size.width * 0.04),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          ],
+                        )
                       ],
                     ),
                   );
                 });
-          }else{
-            return const Center(
-              child:CircularProgressIndicator()
-            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

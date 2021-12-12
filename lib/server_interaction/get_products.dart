@@ -23,7 +23,7 @@ class Server {
         Uri.parse('https://fyp-87.herokuapp.com/order/create/2'),
         body: map,
         headers: {'Accept': 'Application/json'});
-
+    print("Order is placed => ${response.body}");
     if (response.statusCode == 200) {
       print(response.body);
       return true;

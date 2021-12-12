@@ -1,19 +1,19 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fifteenbucks/common/functions.dart';
+import 'package:fifteenbucks/model/cart_model.dart';
 import 'package:fifteenbucks/server_interaction/get_products.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class OrderPlaceScreen extends StatefulWidget {
-  final String productUrl;
-  final String productName;
-  final String image;
-  final String price;
-  const OrderPlaceScreen(
-      {Key? key,
-      required this.productName,
-      required this.productUrl,
-      required this.image,
-      required this.price})
-      : super(key: key);
+  final List<Map> list;
+
+  const OrderPlaceScreen({
+    Key? key,
+    required this.list,
+  }) : super(key: key);
 
   @override
   _OrderPlaceScreenState createState() => _OrderPlaceScreenState();
@@ -22,6 +22,21 @@ class OrderPlaceScreen extends StatefulWidget {
 class _OrderPlaceScreenState extends State<OrderPlaceScreen> {
   TextEditingController _controllerName = TextEditingController();
   TextEditingController _controllerAddress = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    print("Data => ${widget.list}");
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
+      _controllerName.text = value.get('name');
+      _controllerAddress.text = value.get('address');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -52,11 +67,11 @@ class _OrderPlaceScreenState extends State<OrderPlaceScreen> {
                 margin: EdgeInsets.symmetric(
                     horizontal: size.width * 0.05, vertical: 10),
                 child: TextField(
-                  controller: _controllerName,
+                    controller: _controllerName,
                     decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Your name',
-                )),
+                      border: InputBorder.none,
+                      hintText: 'Your name',
+                    )),
                 decoration: BoxDecoration(
                     border: Border.all(
                       color: Colors.red,
@@ -81,31 +96,32 @@ class _OrderPlaceScreenState extends State<OrderPlaceScreen> {
                     borderRadius: BorderRadius.circular(10)),
               ),
               InkWell(
-                onTap: () async{
-                bool result = await Server().sendOrder({
+                onTap: () async {
+                  Map<String, dynamic> map = {
                     'userName': _controllerName.text,
-                    'product': widget.productName,
+                    'product': widget.list,
                     'address': _controllerAddress.text,
-                    'productUrl': widget.productUrl,
-                    'image': widget.image,
-                    'price':widget.price,
-                  });
-                if(result == true){
-                  showSnackBarSuccess(context, 'Order is sent');
-                  Navigator.pop(context);
+                    'userId': FirebaseAuth.instance.currentUser!.uid,
+                  };
 
-                }else{
-                  showSnackBarFailed(context, 'Something is wrong');
-                }
+                  bool result = await Server().sendOrder(map);
+                  if (result == true) {
+                    showSnackBarSuccess(context, 'Order is sent');
+                    Navigator.pop(context);
+                  } else {
+                    showSnackBarFailed(context, 'Something is wrong');
+                  }
                 },
                 child: Container(
                   alignment: Alignment.center,
                   height: 50,
                   margin: EdgeInsets.symmetric(
-                      horizontal: size.width * 0.05, vertical: size.height * 0.2),
+                      horizontal: size.width * 0.05,
+                      vertical: size.height * 0.2),
                   width: size.width,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10), color: Colors.red),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.red),
                   child: Text(
                     'Send order',
                     style: TextStyle(

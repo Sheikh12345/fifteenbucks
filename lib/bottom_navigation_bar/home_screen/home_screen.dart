@@ -13,6 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'components/all_product_view.dart';
+import 'components/search_products.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -67,16 +70,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin:
                           EdgeInsets.symmetric(horizontal: size.width * 0.1),
                       child: TextField(
+                        readOnly: true,
+                        onTap: () {
+                          if (state.productModel.products != null) {
+                            screenPush(
+                                context,
+                                SearchLessonScreen(
+                                  listOfProducts: state.productModel.products!,
+                                ));
+                          }
+                        },
                         decoration: InputDecoration(
-                            hintText: 'Find your products',
-                            border: InputBorder.none,
-                            prefixIcon: const Icon(Icons.search),
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                showBottomSheet(size, context);
-                              },
-                              icon: const Icon(Icons.filter_alt_sharp),
-                            )),
+                          hintText: 'Find your products',
+                          border: InputBorder.none,
+                          prefixIcon: const Icon(Icons.search),
+                        ),
                       ),
                     ),
                     Container(
@@ -161,7 +169,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               setState(() {
                                 selectedIndex = 3;
                                 category = 'watches';
-
                               });
                               getProducts('watches', context);
                             },
@@ -175,7 +182,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               setState(() {
                                 selectedIndex = 4;
                                 category = 'beauty-health';
-
                               });
                               getProducts('beauty-health', context);
                             },
@@ -228,7 +234,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               setState(() {
                                 selectedIndex = 8;
                                 category = 'phone-telecommunication';
-
                               });
                               getProducts('phone-telecommunication', context);
                             },
@@ -242,7 +247,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               setState(() {
                                 selectedIndex = 9;
                                 category = 'computer-office';
-
                               });
                               getProducts('computer-office', context);
                             },
@@ -256,12 +260,31 @@ class _HomeScreenState extends State<HomeScreen> {
                               setState(() {
                                 selectedIndex = 10;
                                 category = 'bags-luggage';
-
                               });
                               getProducts('bags-luggage', context);
                             },
                           ),
                         ],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        screenPush(
+                            context,
+                            AllProductScreen(
+                              productsList: state.productModel.products!,
+                            ));
+                      },
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        margin: EdgeInsets.only(right: 20, bottom: 10),
+                        width: size.width,
+                        height: size.height * 0.04,
+                        child: Text(
+                          'View all',
+                          style: GoogleFonts.rubik(
+                              color: Colors.red, fontWeight: FontWeight.w900),
+                        ),
                       ),
                     ),
                     Container(
@@ -280,6 +303,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 screenPush(
                                     context,
                                     ProductViewScreen(
+                                        recommendedProducts:
+                                            state.productModel.products!,
                                         image: "https:" +
                                             state.productModel.products![index]
                                                 .productImage
@@ -305,6 +330,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         screenPush(
                                             context,
                                             ProductViewScreen(
+                                                recommendedProducts: state
+                                                    .productModel.products!,
                                                 image: "https:" +
                                                     state
                                                         .productModel
@@ -363,7 +390,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         children: [
                                           TextSpan(
                                             text:
-                                                '${state.productModel.products![index].productPrice}',
+                                                '\$ ${state.productModel.products![index].productPrice}',
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.w600,

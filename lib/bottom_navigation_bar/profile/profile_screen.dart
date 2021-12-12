@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fifteenbucks/authentication/login_screen.dart';
+import 'package:fifteenbucks/bottom_navigation_bar/profile/pages/edit_profile.dart';
+import 'package:fifteenbucks/bottom_navigation_bar/profile/pages/my_orders.dart';
+import 'package:fifteenbucks/bottom_navigation_bar/profile/pages/shipping_address.dart';
+import 'package:fifteenbucks/chat_screen/list_of_chat_users.dart';
 import 'package:fifteenbucks/common/navgation_fun.dart';
 import 'package:fifteenbucks/styles/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +18,24 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  String name = '';
+  String profileLink = '';
+  String email = '';
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
+      name = value.get('name');
+      profileLink = value.get('image');
+    }).whenComplete(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -32,18 +55,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: size.width * 0.3,
                     height: size.width * 0.3,
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: NetworkImage('https://i.pinimg.com/564x/38/20/2b/38202b63306e78378c74631fffb7f0ee.jpg')
-                      )
-                    ),
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        image:
+                            DecorationImage(image: NetworkImage(profileLink))),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "Kashif",
+                    "$name",
                     style: GoogleFonts.cabin(
                       fontWeight: FontWeight.bold,
                       fontSize: size.width * 0.05,
@@ -73,7 +94,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () async {
+                      await screenPush(context, EditProfileScreen());
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .get()
+                          .then((value) {
+                        name = value.get('name');
+                        profileLink = value.get('image');
+                      }).whenComplete(() {
+                        setState(() {});
+                      });
+                    },
                     child: Text(
                       'Edit profile',
                       style: TextStyle(
@@ -84,7 +117,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      screenPush(context, MyOrdersScreen());
+                    },
                     child: Text(
                       "My Orders",
                       style: TextStyle(
@@ -95,18 +130,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
-                    child: Text(
-                      'Order history',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: size.width * 0.05,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      screenPush(context, const ShippingAddress());
+                    },
                     child: Text(
                       'Shipping address',
                       style: TextStyle(
@@ -117,8 +143,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   InkWell(
-                    onTap: (){
-                      FirebaseAuth.instance.signOut().whenComplete((){
+                    onTap: () {
+                      screenPush(context, const ListOfChatUsers());
+                    },
+                    child: Text(
+                      'Chat',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: size.width * 0.05,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      FirebaseAuth.instance.signOut().whenComplete(() {
                         screenPushRep(context, const LoginScreen());
                       });
                     },

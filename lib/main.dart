@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:fifteenbucks/bloc/products_cubit/products_cubit.dart';
 import 'package:fifteenbucks/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,12 +23,10 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print('A bg message just showed up :  ${message.messageId}');
 }
 
-late List<CameraDescription?> cameras;
 
 
 Future<void> main()async {
   await GetStorage.init();
-  cameras = await availableCameras();
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
