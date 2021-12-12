@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fifteenbucks/bottom_navigation_bar/home_screen/components/custom_tile.dart';
 import 'package:fifteenbucks/bottom_navigation_bar/home_screen/product_review.dart';
 import 'package:fifteenbucks/bottom_navigation_bar/home_screen/products_screen.dart';
 import 'package:fifteenbucks/common/functions.dart';
@@ -10,6 +11,7 @@ import 'package:fifteenbucks/styles/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,11 +26,16 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  getProducts(String category, BuildContext context) {
+    context.read<ProductsCubit>().getProducts(category);
+    ProductsCubit()..getProducts(category);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (context) => ProductsCubit()..getProducts('mens-clothing'),
+      create: (context) => ProductsCubit()..getProducts(category),
       child: BlocConsumer<ProductsCubit, ProductsState>(
         listener: (context, state) {
           if (state is ProductsFailedState) {
@@ -37,171 +44,344 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         builder: (context, state) {
           if (state is ProductsLoading) {
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
+            return const SafeArea(
+              child: Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
             );
           } else if (state is ProductsSuccessState) {
-            return Scaffold(
-              body: Column(
-                children: [
-                  SizedBox(
-                    height: size.height * 0.03,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(10)),
-                    width: size.width,
-                    margin: EdgeInsets.symmetric(horizontal: size.width * 0.1),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          hintText: 'Find your products',
-                          border: InputBorder.none,
-                          prefixIcon: const Icon(Icons.search),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              showBottomSheet(size, context);
-                            },
-                            icon: const Icon(Icons.filter_alt_sharp),
-                          )),
+            return SafeArea(
+              child: Scaffold(
+                body: Column(
+                  children: [
+                    SizedBox(
+                      height: size.height * 0.03,
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: size.height * 0.02),
-                    height: size.height * 0.2,
-                    child: CarouselSlider(
-                      options: CarouselOptions(
-                        height: 400,
-                        aspectRatio: 16 / 9,
-                        viewportFraction: 0.7,
-                        initialPage: 0,
-                        enableInfiniteScroll: true,
-                        reverse: false,
-                        autoPlay: true,
-                        autoPlayInterval: const Duration(seconds: 3),
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 800),
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enlargeCenterPage: true,
-                        scrollDirection: Axis.horizontal,
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(10)),
+                      width: size.width,
+                      margin:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.1),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: 'Find your products',
+                            border: InputBorder.none,
+                            prefixIcon: const Icon(Icons.search),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                showBottomSheet(size, context);
+                              },
+                              icon: const Icon(Icons.filter_alt_sharp),
+                            )),
                       ),
-                      items: Constants().slider.map((i) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Container(
-                              height: size.height * 0.2,
-                              width: MediaQuery.of(context).size.width,
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 4.0),
-                              decoration: BoxDecoration(
-                                color: Colors.amber,
-                                image: DecorationImage(
-                                    image: AssetImage('assets/$i'),
-                                    fit: BoxFit.fill),
-                                borderRadius: BorderRadius.circular(10),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: size.height * 0.02),
+                      height: size.height * 0.2,
+                      child: CarouselSlider(
+                        options: CarouselOptions(
+                          height: 400,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.7,
+                          initialPage: 0,
+                          enableInfiniteScroll: true,
+                          reverse: false,
+                          autoPlay: true,
+                          autoPlayInterval: const Duration(seconds: 3),
+                          autoPlayAnimationDuration:
+                              const Duration(milliseconds: 800),
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enlargeCenterPage: true,
+                          scrollDirection: Axis.horizontal,
+                        ),
+                        items: Constants().slider.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return Container(
+                                height: size.height * 0.2,
+                                width: MediaQuery.of(context).size.width,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.amber,
+                                  image: DecorationImage(
+                                      image: AssetImage('assets/$i'),
+                                      fit: BoxFit.fill),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              );
+                            },
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      width: size.width,
+                      height: 50,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          CustomTile(
+                            title: 'Mens clothing',
+                            bgColor:
+                                selectedIndex == 0 ? Colors.red : Colors.grey,
+                            txtColor: Colors.white,
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = 0;
+                                category = 'mens-clothing';
+                              });
+                              getProducts('mens-clothing', context);
+                            },
+                          ),
+                          CustomTile(
+                            title: 'Womens clothing',
+                            bgColor:
+                                selectedIndex == 1 ? Colors.red : Colors.grey,
+                            txtColor: Colors.white,
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = 1;
+                                category = 'womens-clothing';
+                              });
+                              getProducts('womens-clothing', context);
+                            },
+                          ),
+                          CustomTile(
+                            title: 'Watches',
+                            bgColor:
+                                selectedIndex == 3 ? Colors.red : Colors.grey,
+                            txtColor: Colors.white,
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = 3;
+                                category = 'watches';
+
+                              });
+                              getProducts('watches', context);
+                            },
+                          ),
+                          CustomTile(
+                            title: 'Beauty health',
+                            bgColor:
+                                selectedIndex == 4 ? Colors.red : Colors.grey,
+                            txtColor: Colors.white,
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = 4;
+                                category = 'beauty-health';
+
+                              });
+                              getProducts('beauty-health', context);
+                            },
+                          ),
+                          CustomTile(
+                            title: 'outdoor sports',
+                            bgColor:
+                                selectedIndex == 5 ? Colors.red : Colors.grey,
+                            txtColor: Colors.white,
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = 5;
+                                category = 'outdoor-sports';
+                              });
+                              getProducts('outdoor-sports', context);
+                            },
+                          ),
+                          CustomTile(
+                            title: 'Toys kids',
+                            bgColor:
+                                selectedIndex == 6 ? Colors.red : Colors.grey,
+                            txtColor: Colors.white,
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = 6;
+                                category = 'toys-kids';
+                              });
+                              getProducts('toys-kids', context);
+                            },
+                          ),
+                          CustomTile(
+                            title: 'Home',
+                            bgColor:
+                                selectedIndex == 7 ? Colors.red : Colors.grey,
+                            txtColor: Colors.white,
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = 7;
+                                category = 'home';
+                              });
+                              getProducts('home', context);
+                            },
+                          ),
+                          CustomTile(
+                            title: 'Phone telecommunication',
+                            bgColor:
+                                selectedIndex == 8 ? Colors.red : Colors.grey,
+                            txtColor: Colors.white,
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = 8;
+                                category = 'phone-telecommunication';
+
+                              });
+                              getProducts('phone-telecommunication', context);
+                            },
+                          ),
+                          CustomTile(
+                            title: 'Computer office',
+                            bgColor:
+                                selectedIndex == 9 ? Colors.red : Colors.grey,
+                            txtColor: Colors.white,
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = 9;
+                                category = 'computer-office';
+
+                              });
+                              getProducts('computer-office', context);
+                            },
+                          ),
+                          CustomTile(
+                            title: 'Bags luggage',
+                            bgColor:
+                                selectedIndex == 10 ? Colors.red : Colors.grey,
+                            txtColor: Colors.white,
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = 10;
+                                category = 'bags-luggage';
+
+                              });
+                              getProducts('bags-luggage', context);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Expanded(
+                        child: GridView.builder(
+                          itemCount: state.productModel.products!.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 1.0,
+                                  crossAxisSpacing: 5.0,
+                                  childAspectRatio: .6),
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                screenPush(
+                                    context,
+                                    ProductViewScreen(
+                                        image: "https:" +
+                                            state.productModel.products![index]
+                                                .productImage
+                                                .toString(),
+                                        price: state.productModel
+                                            .products![index].productPrice
+                                            .toString(),
+                                        name: state.productModel
+                                            .products![index].productName
+                                            .toString(),
+                                        productUrl: state.productModel
+                                            .products![index].productUrl
+                                            .toString()));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: size.width * 0.04),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        screenPush(
+                                            context,
+                                            ProductViewScreen(
+                                                image: "https:" +
+                                                    state
+                                                        .productModel
+                                                        .products![index]
+                                                        .productImage
+                                                        .toString(),
+                                                price: state
+                                                    .productModel
+                                                    .products![index]
+                                                    .productPrice
+                                                    .toString(),
+                                                name: state
+                                                    .productModel
+                                                    .products![index]
+                                                    .productName
+                                                    .toString(),
+                                                productUrl: state.productModel
+                                                    .products![index].productUrl
+                                                    .toString()));
+                                      },
+                                      child: Container(
+                                        width: size.width * 0.6,
+                                        height: size.height * 0.26,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: NetworkImage("https:" +
+                                                  state
+                                                      .productModel
+                                                      .products![index]
+                                                      .productImage
+                                                      .toString()),
+                                              fit: BoxFit.fill,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                      ),
+                                    ),
+                                    Text(
+                                      '${state.productModel.products![index].productName}',
+                                      style: TextStyle(
+                                        fontSize: size.width * 0.04,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    SizedBox(
+                                      height: size.height * 0.01,
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        text: 'Price: ',
+                                        style: TextStyle(
+                                            color: Colors.grey.shade700,
+                                            fontWeight: FontWeight.w600),
+                                        children: [
+                                          TextSpan(
+                                            text:
+                                                '${state.productModel.products![index].productPrice}',
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           },
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  Container(
-                    child: Expanded(
-                      child: GridView.builder(
-                        itemCount: state.productModel.products!.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 1.0,
-                                crossAxisSpacing: 5.0,
-                                childAspectRatio: .6),
-                        itemBuilder: (context, index) {
-                          print(
-                              '${state.productModel.products![0].productImage}');
-                          return InkWell(
-                            onTap: () {
-                              print(
-                                  "https:${state.productModel.products![index].productImage.toString()}");
-                              screenPush(
-                                  context,
-                                  ProductViewScreen(
-                                      image:
-                                          'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2-4-1633383922.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
-                                      price: state.productModel.products![index]
-                                          .productPrice
-                                          .toString(),
-                                      name: state.productModel.products![index]
-                                          .productName
-                                          .toString(),
-                                      productUrl: state.productModel
-                                          .products![index].productUrl
-                                          .toString()));
-                            },
-                            child: Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: size.width * 0.04),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  InkWell(
-                                    onTap:(){
-                                      print("image => ${state.productModel.products![index].productImage.toString()}");
-                                    },
-                                    child: Container(
-                                      width: size.width * 0.6,
-                                      height: size.height * 0.26,
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                                "https:"+state.productModel.products![index].productImage.toString()),
-                                            fit: BoxFit.fill,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                    ),
-                                  ),
-                                  Text(
-                                    '${state.productModel.products![index].productName}',
-                                    style: TextStyle(
-                                      fontSize: size.width * 0.04,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  SizedBox(
-                                    height: size.height * 0.01,
-                                  ),
-                                  RichText(
-                                    text: TextSpan(
-                                      text: 'Price: ',
-                                      style: TextStyle(
-                                          color: Colors.grey.shade700,
-                                          fontWeight: FontWeight.w600),
-                                      children: [
-                                        TextSpan(
-                                          text:
-                                              '${state.productModel.products![index].productPrice}',
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             );
           } else {
