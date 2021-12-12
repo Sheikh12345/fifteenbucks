@@ -4,13 +4,14 @@
 
 class ProductModel {
   ProductModel({
-      bool? success, 
-      int? total, 
-      List<Products>? products,}){
+    bool? success,
+    int? total,
+    List<Products>? products,
+  }) {
     _success = success;
     _total = total;
     _products = products;
-}
+  }
 
   ProductModel.fromJson(dynamic json) {
     _success = json['success'];
@@ -39,7 +40,6 @@ class ProductModel {
     }
     return map;
   }
-
 }
 
 /// productName : "Bornladies 2021 Basic Turtleneck Women Sweaters Autumn Winter Tops Slim Women Pullover Knitted Sweater Jumper Soft Warm Pull"
@@ -49,15 +49,16 @@ class ProductModel {
 
 class Products {
   Products({
-      String? productName, 
-      String? productUrl, 
-      String? productImage, 
-      dynamic? productPrice,}){
+    String? productName,
+    String? productUrl,
+    String? productImage,
+    dynamic? productPrice,
+  }) {
     _productName = productName;
     _productUrl = productUrl;
     _productImage = productImage;
     _productPrice = productPrice;
-}
+  }
 
   Products.fromJson(dynamic json) {
     _productName = json['productName'];
@@ -83,5 +84,4 @@ class Products {
     map['productPrice'] = _productPrice;
     return map;
   }
-
 }

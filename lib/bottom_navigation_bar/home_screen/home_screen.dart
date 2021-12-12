@@ -146,17 +146,22 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    width: size.width * 0.6,
-                                    height: size.height * 0.26,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                              'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2-4-1633383922.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*'),
-                                          fit: BoxFit.fill,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
+                                  InkWell(
+                                    onTap:(){
+                                      print("image => ${state.productModel.products![index].productImage.toString()}");
+                                    },
+                                    child: Container(
+                                      width: size.width * 0.6,
+                                      height: size.height * 0.26,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                "https:"+state.productModel.products![index].productImage.toString()),
+                                            fit: BoxFit.fill,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                    ),
                                   ),
                                   Text(
                                     '${state.productModel.products![index].productName}',
