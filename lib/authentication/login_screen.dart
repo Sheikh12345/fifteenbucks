@@ -22,6 +22,14 @@ class _LoginScreenState extends State<LoginScreen> {
   int? roleValue;
 
   @override
+  void initState() {
+    super.initState();
+    setState(() {
+
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
