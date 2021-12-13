@@ -334,25 +334,30 @@ class _ChatScreenWithUserState extends State<ChatScreenWithUser>
                                 'date': DateTime.now(),
                               },
                             );
-
                             FirebaseFirestore.instance
-                                .collection('messages')
-                                //sender
-                                .doc(widget.receiverId.toString())
-                                // receiver
-                                .collection('contacts')
-                                .doc(FirebaseAuth.instance.currentUser!.uid
-                                    .toString())
-                                .set(
-                              {
-                                'type': 'text',
-                                'text': messageTextController.text,
-                                'name': 'sender',
-                                'receiverId':
-                                    FirebaseAuth.instance.currentUser!.uid,
-                                'date': DateTime.now(),
-                              },
-                            );
+                                .collection('users')
+                                .doc(FirebaseAuth.instance.currentUser!.uid)
+                                .get()
+                                .then((value) {
+                              FirebaseFirestore.instance
+                                  .collection('messages')
+                                  //sender
+                                  .doc(widget.receiverId.toString())
+                                  // receiver
+                                  .collection('contacts')
+                                  .doc(FirebaseAuth.instance.currentUser!.uid
+                                      .toString())
+                                  .set(
+                                {
+                                  'type': 'text',
+                                  'text': messageTextController.text,
+                                  'name': '${value.get('name')}',
+                                  'receiverId':
+                                      FirebaseAuth.instance.currentUser!.uid,
+                                  'date': DateTime.now(),
+                                },
+                              );
+                            });
 
                             FirebaseFirestore.instance
                                 .collection('messages')
