@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fifteenbucks/model/product_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class Server {
   Future<ProductModel> getProducts(String endPoint) async {
@@ -19,15 +20,23 @@ class Server {
   }
 
   Future<bool> sendOrder(Map map) async {
-    http.Response response = await http.post(
-        Uri.parse('https://fyp-87.herokuapp.com/order/create/2'),
-        body: map,
-        headers: {'Accept': 'Application/json'});
-    print("Order is placed => ${response.body}");
-    if (response.statusCode == 200) {
-      print(response.body);
-      return true;
-    } else {
+    print("Sending data => ${map}");
+    var dio = Dio();
+
+    try {
+      final response = await dio.post(
+        'https://fyp-87.herokuapp.com/order/create',
+        data: map,
+      );
+      print("Order is placed => ${response.data}");
+      if (response.statusCode == 200) {
+        print(response.data);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print("Order is ${e.toString()}");
       return false;
     }
   }
