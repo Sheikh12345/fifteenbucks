@@ -67,6 +67,7 @@ class _CartScreenState extends State<CartScreen> {
               context,
               OrderPlaceScreen(
                 list: products,
+                totalPrice:totalPrice
               ),
             );
           });

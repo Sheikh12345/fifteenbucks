@@ -3,13 +3,17 @@ import 'package:fifteenbucks/common/functions.dart';
 import 'package:fifteenbucks/server_interaction/get_products_api.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'components/stripe_service.dart';
 
 class OrderPlaceScreen extends StatefulWidget {
   final List<Map> list;
-
+  final double totalPrice;
   const OrderPlaceScreen({
     Key? key,
     required this.list,
+    required this.totalPrice,
   }) : super(key: key);
 
   @override
@@ -20,9 +24,10 @@ class _OrderPlaceScreenState extends State<OrderPlaceScreen> {
   TextEditingController _controllerName = TextEditingController();
   TextEditingController _controllerAddress = TextEditingController();
   TextEditingController _controllerPhone = TextEditingController();
-
+  int? selectedMethod;
   @override
   void initState() {
+    StripeService.init();
     super.initState();
     print("Data => ${widget.list}");
     FirebaseFirestore.instance
@@ -109,25 +114,108 @@ class _OrderPlaceScreenState extends State<OrderPlaceScreen> {
                     ),
                     borderRadius: BorderRadius.circular(10)),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    children: [
+                      Text("Stripe"),
+                      Radio(
+                          value: 0,
+                          groupValue: selectedMethod,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedMethod = int.parse(value.toString());
+                            });
+                          })
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text("Cash on delivery"),
+                      Radio(
+                          value: 1,
+                          groupValue: selectedMethod,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedMethod = int.parse(value.toString());
+                            });
+                          })
+                    ],
+                  )
+                ],
+              ),
               InkWell(
                 onTap: () async {
                   if (_controllerName.text.isNotEmpty &&
                       _controllerAddress.text.isNotEmpty &&
                       _controllerPhone.text.isNotEmpty) {
-                    var formData = {
-                      'userName': _controllerName.text,
-                      'products': widget.list,
-                      'address': _controllerAddress.text,
-                      'userId': FirebaseAuth.instance.currentUser!.uid,
-                      'phoneNo': _controllerPhone.text,
-                      'deliveryMethod': 'cod'
-                    };
-                    bool result = await Server().sendOrder(formData);
-                    if (result == true) {
-                      getProductList();
-                      showSnackBarSuccess(context, 'Order is sent');
+                    if (selectedMethod == 0) {
+                      print("${selectedMethod}");
+                      final stripeTransactionResponse =
+                          await StripeService.payWithNewCard(
+                              amount: widget.totalPrice.toString(),
+                              currency: 'USD');
+                      print(stripeTransactionResponse.message);
+                      if (stripeTransactionResponse.success ?? false) {
+                        Navigator.pop(context);
+                        showSnackBarSuccess(
+                            context, '${stripeTransactionResponse.message}');
+                        var formData = {
+                          'userName': _controllerName.text,
+                          'products': widget.list,
+                          'address': _controllerAddress.text,
+                          'userId': FirebaseAuth.instance.currentUser!.uid,
+                          'phoneNo': _controllerPhone.text,
+                          'deliveryMethod': 'cod'
+                        };
+                        bool result = await Server().sendOrder(formData);
+                        if (result == true) {
+                          getProductList();
+                          showSnackBarSuccess(context, 'Order is sent');
+                        } else {
+                          showSnackBarFailed(context, 'Something is wrong');
+                        }
+                      } else {
+                        if (stripeTransactionResponse.message ==
+                            'Transaction cancelled') {
+                          showSnackBarFailed(
+                              context, '${stripeTransactionResponse.message}');
+                          return;
+                        }
+                        var formData = {
+                          'userName': _controllerName.text,
+                          'products': widget.list,
+                          'address': _controllerAddress.text,
+                          'userId': FirebaseAuth.instance.currentUser!.uid,
+                          'phoneNo': _controllerPhone.text,
+                          'deliveryMethod': 'cod'
+                        };
+                        bool result = await Server().sendOrder(formData);
+                        if (result == true) {
+                          getProductList();
+                          showSnackBarSuccess(context, 'Order is sent');
+                        } else {
+                          showSnackBarFailed(context, 'Something is wrong');
+                        }
+                      }
                     } else {
-                      showSnackBarFailed(context, 'Something is wrong');
+                      print("selcted method = ${selectedMethod}");
+                      // var formData = {
+                      //   'userName': _controllerName.text,
+                      //   'products': widget.list,
+                      //   'address': _controllerAddress.text,
+                      //   'userId': FirebaseAuth.instance.currentUser!.uid,
+                      //   'phoneNo': _controllerPhone.text,
+                      //   'deliveryMethod': 'cod'
+                      // };
+                      // bool result = await Server().sendOrder(formData);
+                      // if (result == true) {
+                      //   getProductList();
+                      //   showSnackBarSuccess(context, 'Order is sent');
+                      // } else {
+                      //   showSnackBarFailed(context, 'Something is wrong');
+                      // }
                     }
                   } else {
                     showSnackBarFailed(context, 'Something is missing');

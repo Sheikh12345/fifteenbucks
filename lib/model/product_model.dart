@@ -52,7 +52,7 @@ class Products {
     String? productName,
     String? productUrl,
     String? productImage,
-    dynamic? productPrice,
+    dynamic productPrice,
   }) {
     _productName = productName;
     _productUrl = productUrl;

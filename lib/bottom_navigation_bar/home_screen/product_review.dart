@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fifteenbucks/bottom_navigation_bar/cart_screen/cart_screen.dart';
 import 'package:fifteenbucks/chat_screen/chat_screen.dart';
 import 'package:fifteenbucks/common/functions.dart';
 import 'package:fifteenbucks/common/navgation_fun.dart';
@@ -276,18 +277,37 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
                   size: size.width * 0.078,
                 ),
               ),
-              Container(
-                alignment: Alignment.center,
-                width: size.width * 0.6,
-                height: size.height * 0.08,
-                decoration: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(30)),
-                child: Text(
-                  "Buy Now",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: size.width * 0.04,
+              InkWell(
+                onTap: () {
+                  FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .collection('cart')
+                      .add({
+                    'image': widget.image,
+                    'price': widget.price,
+                    'totalPrice': widget.price,
+                    'name': widget.name,
+                    'productUrl': widget.productUrl,
+                    'quantity': 1
+                  }).whenComplete(() {
+                    screenPushRep(context, const CartScreen());
+                  });
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: size.width * 0.6,
+                  height: size.height * 0.08,
+                  decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Text(
+                    "Buy Now",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: size.width * 0.04,
+                    ),
                   ),
                 ),
               )
