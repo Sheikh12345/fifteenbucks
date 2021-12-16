@@ -51,7 +51,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     SizedBox(
                       height: size.height * 0.03,
                     ),
-                     Container(
+                    Container(
                       child: Expanded(
                         child: GridView.builder(
                           itemCount: state.productModel.products!.length,
@@ -69,6 +69,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                 screenPush(
                                   context,
                                   ProductViewScreen(
+                                    id: state.productModel.products![index].id.toString(),
                                     image:
                                         'https:${state.productModel.products![index].productImage.toString()}',
                                     price: state.productModel.products![index]

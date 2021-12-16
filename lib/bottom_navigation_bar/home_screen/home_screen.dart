@@ -303,6 +303,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 screenPush(
                                     context,
                                     ProductViewScreen(
+                                        id: state
+                                            .productModel.products![index].id
+                                            .toString(),
                                         recommendedProducts:
                                             state.productModel.products!,
                                         image: "https:" +
@@ -330,6 +333,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         screenPush(
                                             context,
                                             ProductViewScreen(
+                                                id: state.productModel
+                                                    .products![index].id
+                                                    .toString(),
                                                 recommendedProducts: state
                                                     .productModel.products!,
                                                 image: "https:" +

@@ -15,6 +15,7 @@ class ProductViewScreen extends StatefulWidget {
   final String name;
   final String productUrl;
   final List<Products> recommendedProducts;
+  final String id;
   const ProductViewScreen({
     Key? key,
     required this.image,
@@ -22,6 +23,7 @@ class ProductViewScreen extends StatefulWidget {
     required this.name,
     required this.productUrl,
     required this.recommendedProducts,
+    required this.id,
   }) : super(key: key);
 
   @override
@@ -82,6 +84,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
                                   .doc(FirebaseAuth.instance.currentUser!.uid)
                                   .collection('favorite')
                                   .add({
+                                'id':widget.id,
                                 'image': widget.image,
                                 'price': widget.price,
                                 'name': widget.name,
@@ -173,6 +176,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
                             screenPush(
                               context,
                               ProductViewScreen(
+                                id: widget.id,
                                 image:
                                     'https:${widget.recommendedProducts[index].productImage.toString()}',
                                 price: widget
@@ -260,6 +264,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
                       .doc(FirebaseAuth.instance.currentUser!.uid)
                       .collection('cart')
                       .add({
+                    'id':widget.id,
                     'image': widget.image,
                     'price': widget.price,
                     'totalPrice': widget.price,
@@ -284,6 +289,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
                       .doc(FirebaseAuth.instance.currentUser!.uid)
                       .collection('cart')
                       .add({
+                    'id':widget.id,
                     'image': widget.image,
                     'price': widget.price,
                     'totalPrice': widget.price,

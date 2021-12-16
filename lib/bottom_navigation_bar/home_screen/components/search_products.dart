@@ -101,7 +101,8 @@ class _SearchLessonScreenState extends State<SearchLessonScreen> {
                           .where((u) => (u.productName!
                                   .toLowerCase()
                                   .contains(string.toLowerCase()) ||
-                              u.productPrice.toString()
+                              u.productPrice
+                                  .toString()
                                   .toLowerCase()
                                   .contains(string.toLowerCase())))
                           .toList();
@@ -125,6 +126,7 @@ class _SearchLessonScreenState extends State<SearchLessonScreen> {
                         screenPush(
                             context,
                             ProductViewScreen(
+                                id: _filters[index].id.toString(),
                                 recommendedProducts: widget.listOfProducts,
                                 image: "https:" +
                                     _filters[index].productImage.toString(),
@@ -144,6 +146,8 @@ class _SearchLessonScreenState extends State<SearchLessonScreen> {
                                 screenPush(
                                     context,
                                     ProductViewScreen(
+                                        id: widget.listOfProducts[index].id
+                                            .toString(),
                                         recommendedProducts:
                                             widget.listOfProducts,
                                         image: "https:" +

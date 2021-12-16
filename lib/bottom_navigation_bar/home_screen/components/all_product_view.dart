@@ -37,6 +37,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                 screenPush(
                     context,
                     ProductViewScreen(
+                      id: widget.productsList[index].id.toString(),
                         recommendedProducts: widget.productsList,
                         image: "https:" +
                             widget.productsList[index].productImage.toString(),
@@ -56,6 +57,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                         screenPush(
                             context,
                             ProductViewScreen(
+                                id: widget.productsList[index].id.toString(),
                                 recommendedProducts: widget.productsList,
                                 image: "https:" +
                                     widget.productsList[index].productImage

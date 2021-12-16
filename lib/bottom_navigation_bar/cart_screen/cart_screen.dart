@@ -54,6 +54,7 @@ class _CartScreenState extends State<CartScreen> {
           .get()
           .then((value) {
         products.add({
+          'productId': value.get('id'),
           "productName": value.get('name'),
           "productPrice":
               '${double.parse(value.get('price')) + value.get('quantity')}',
@@ -62,13 +63,10 @@ class _CartScreenState extends State<CartScreen> {
         });
       }).whenComplete(() {
         if (products.isNotEmpty) {
-          Future.delayed(Duration(seconds: 1), () {
+          Future.delayed(const Duration(seconds: 1), () {
             screenPush(
               context,
-              OrderPlaceScreen(
-                list: products,
-                totalPrice:totalPrice
-              ),
+              OrderPlaceScreen(list: products, totalPrice: totalPrice),
             );
           });
         } else {
