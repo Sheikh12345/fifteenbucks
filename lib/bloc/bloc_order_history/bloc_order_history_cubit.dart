@@ -12,7 +12,7 @@ class BlocOrderHistoryCubit extends Cubit<BlocOrderHistoryState> {
     emit(BlocOrderHistoryLoadingState());
     final AllOrdersHistoryModel allOrdersHistoryModel =
         await GetHistoryApi().getOrdersList();
-
+    print("Order status => ${allOrdersHistoryModel.success}");
     if (allOrdersHistoryModel.success ?? false) {
       emit(BlocOrderHistorySuccessState(allOrdersHistoryModel));
     } else {

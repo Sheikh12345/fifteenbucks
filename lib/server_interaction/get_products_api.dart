@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 class Server {
   Future<ProductModel> getProducts(String endPoint) async {
     http.Response response = await http.get(
-        Uri.parse('https://fyp-87.herokuapp.com/getdata/$endPoint'),
+        Uri.parse('https://fyp-80.herokuapp.com/getdata/$endPoint'),
         headers: {'Accept': 'Application/json'});
 
     if (response.statusCode == 200) {
@@ -25,7 +25,7 @@ class Server {
 
     try {
       final response = await dio.post(
-        'https://fyp-87.herokuapp.com/order/create',
+        'https://fyp-80.herokuapp.com/order/create',
         data: map,
       );
       print("Order is placed => ${response.data}");

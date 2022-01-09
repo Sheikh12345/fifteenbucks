@@ -19,7 +19,11 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
     return BlocProvider(
       create: (context) => BlocOrderHistoryCubit()..getOrderHistory(),
       child: BlocConsumer<BlocOrderHistoryCubit, BlocOrderHistoryState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is BlocOrderHistorySuccessState) {
+            print("Orders => ${state.allOrdersHistoryModel.order!.length}");
+          }
+        },
         builder: (context, state) {
           return SafeArea(
             child: Scaffold(
@@ -41,12 +45,11 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                             ),
                             Expanded(
                               child: ListView.builder(
-                                  itemCount: state.allOrdersHistoryModel.order
-                                          ?.length ??
-                                      0,
+                                  itemCount:
+                                      state.allOrdersHistoryModel.order?.length,
                                   itemBuilder: (context, index) {
                                     if (state.allOrdersHistoryModel
-                                            .order![index].userId !=
+                                            .order![index].userId ==
                                         FirebaseAuth
                                             .instance.currentUser!.uid) {
                                       return Container(

@@ -1,6 +1,7 @@
 /// success : true
-/// totalOrders : 4
-/// order : [{"_id":"61b679825a9dfc348d3c7ed8","userId":"580","userName":"ksshif","phoneNo":"031342545","deliveryMethod":"COD","products":[{"productName":"watch","productUrl":"https://www.aliexpress.com/item/32952974486.html?algo_pvid=485d65e7-83c5-4514-ac40-c2c267d09587&algo_exp_id=485d65e7-83c5-4514-ac40-c2c267d09587-0&pdp_ext_f=%7B%22sku_id%22%3A%2267346783393%22%7D","productImage":"https://ae01.alicdn.com/kf/H199ee943866548d084f6b49edcf0a69cP/360-Slim-Watch-Cover-for-Apple-Watch-Case-6-SE-5-4-3-2-1-42MM.jpg_220x220xz.jpg_.webp%22,%20%22","productPrice":5,"_id":"61b679825a9dfc348d3c7ed9","createdAt":"2021-12-12T22:36:50.205Z","updatedAt":"2021-12-12T22:36:50.205Z"},{"productName":"watch","productUrl":"https://www.aliexpress.com/item/32952974486.html?algo_pvid=485d65e7-83c5-4514-ac40-c2c267d09587&algo_exp_id=485d65e7-83c5-4514-ac40-c2c267d09587-0&pdp_ext_f=%7B%22sku_id%22%3A%2267346783393%22%7D","productImage":"https://ae01.alicdn.com/kf/H199ee943866548d084f6b49edcf0a69cP/360-Slim-Watch-Cover-for-Apple-Watch-Case-6-SE-5-4-3-2-1-42MM.jpg_220x220xz.jpg_.webp%22,%20%22","productPrice":5,"_id":"61b679825a9dfc348d3c7eda","createdAt":"2021-12-12T22:36:50.205Z","updatedAt":"2021-12-12T22:36:50.205Z"}],"address":"ravi road lahore","status":"Not Processed","createdAt":"2021-12-12T22:36:50.205Z","updatedAt":"2021-12-12T22:36:50.205Z","__v":0},{"_id":"61b67ca7443a8a1e8142ad1b","userId":"adsfasdf","userName":"kashif","phoneNo":"03238979555","deliveryMethod":"cod","products":[{"productName":"New Men chinlon Fitness Bodybuilding Shorts Man Summer Gym Workout Male Breathable Quick Dry Sportswear Jogger Beach Short Pants","productUrl":"https://www.aliexpress.com/item/1005002513155953.html?algo_pvid=c8f3c54e-8b1f-4e82-931f-decb3718552e&aem_p4p_detail=202112051358493294312813045870013098278&algo_exp_id=c8f3c54e-8b1f-4e82-931f-decb3718552e-14&pdp_ext_f=%7B%22sku_id%22%3A%22-1%22%7D","productImage":"https://ae01.alicdn.com/kf/H8deb82f070d0455c96386364579a7531o/New-font-b-Men-b-font-chinlon-Fitness-Bodybuilding-Shorts-Man-Summer-Gym-Workout-Male-Breathable.jpg_220x220xz.jpg_.webp","productPrice":11.719999999999999,"_id":"61b67ca7443a8a1e8142ad1c","createdAt":"2021-12-12T22:50:15.625Z","updatedAt":"2021-12-12T22:50:15.625Z"},{"productName":"Men Polo Men Shirt Short Sleeve Polo Shirt Chest Three Stripe Color Stitching Top Comfortable Beach Lapel Men's Top Men's Polo","productUrl":"https://www.aliexpress.com/item/1005003101728396.html?algo_pvid=c874a548-621e-498c-9ea2-4b448c58bca5&algo_exp_id=c874a548-621e-498c-9ea2-4b448c58bca5-0&pdp_ext_f=%7B%22sku_id%22%3A%22-1%22%7D","productImage":"https://ae01.alicdn.com/kf/H758f180beffb4faa9530cfa9badce56eO/Men-Polo-Men-Shirt-Short-Sleeve-Polo-Shirt-Chest-Three-Stripe-Color-Stitching-Top-Comfortable-Beach.jpg_220x220xz.jpg_.webp","productPrice":3.632,"_id":"61b67ca7443a8a1e8142ad1d","createdAt":"2021-12-12T22:50:15.625Z","updatedAt":"2021-12-12T22:50:15.625Z"}],"address":"gulshan ravi lahore","status":"Not Processed","createdAt":"2021-12-12T22:50:15.625Z","updatedAt":"2021-12-12T22:50:15.625Z","__v":0},{"_id":"61b67d69443a8a1e8142ad1f","userId":"7T0lHIneFhhg89mnguiXhMf7i473","userName":"kashif","phoneNo":"12333333333333","deliveryMethod":"cod","products":[{"productName":"New Men chinlon Fitness Bodybuilding Shorts Man Summer Gym Workout Male Breathable Quick Dry Sportswear Jogger Beach Short Pants","productUrl":"https://www.aliexpress.com/item/1005002513155953.html?algo_pvid=c8f3c54e-8b1f-4e82-931f-decb3718552e&aem_p4p_detail=202112051358493294312813045870013098278&algo_exp_id=c8f3c54e-8b1f-4e82-931f-decb3718552e-14&pdp_ext_f=%7B%22sku_id%22%3A%22-1%22%7D","productImage":"https://ae01.alicdn.com/kf/H8deb82f070d0455c96386364579a7531o/New-font-b-Men-b-font-chinlon-Fitness-Bodybuilding-Shorts-Man-Summer-Gym-Workout-Male-Breathable.jpg_220x220xz.jpg_.webp","productPrice":11.719999999999999,"_id":"61b67d69443a8a1e8142ad20","createdAt":"2021-12-12T22:53:29.748Z","updatedAt":"2021-12-12T22:53:29.748Z"},{"productName":"Men Polo Men Shirt Short Sleeve Polo Shirt Chest Three Stripe Color Stitching Top Comfortable Beach Lapel Men's Top Men's Polo","productUrl":"https://www.aliexpress.com/item/1005003101728396.html?algo_pvid=c874a548-621e-498c-9ea2-4b448c58bca5&algo_exp_id=c874a548-621e-498c-9ea2-4b448c58bca5-0&pdp_ext_f=%7B%22sku_id%22%3A%22-1%22%7D","productImage":"https://ae01.alicdn.com/kf/H758f180beffb4faa9530cfa9badce56eO/Men-Polo-Men-Shirt-Short-Sleeve-Polo-Shirt-Chest-Three-Stripe-Color-Stitching-Top-Comfortable-Beach.jpg_220x220xz.jpg_.webp","productPrice":3.632,"_id":"61b67d69443a8a1e8142ad21","createdAt":"2021-12-12T22:53:29.748Z","updatedAt":"2021-12-12T22:53:29.748Z"}],"address":"gulshan ravi lahore","status":"Not Processed","createdAt":"2021-12-12T22:53:29.748Z","updatedAt":"2021-12-12T22:53:29.748Z","__v":0},{"_id":"61b67e59443a8a1e8142ad23","userId":"7T0lHIneFhhg89mnguiXhMf7i473","userName":"kashif","phoneNo":"w23123123213","deliveryMethod":"cod","products":[{"productName":"New Men chinlon Fitness Bodybuilding Shorts Man Summer Gym Workout Male Breathable Quick Dry Sportswear Jogger Beach Short Pants","productUrl":"https://www.aliexpress.com/item/1005002513155953.html?algo_pvid=c8f3c54e-8b1f-4e82-931f-decb3718552e&aem_p4p_detail=202112051358493294312813045870013098278&algo_exp_id=c8f3c54e-8b1f-4e82-931f-decb3718552e-14&pdp_ext_f=%7B%22sku_id%22%3A%22-1%22%7D","productImage":"https://ae01.alicdn.com/kf/H8deb82f070d0455c96386364579a7531o/New-font-b-Men-b-font-chinlon-Fitness-Bodybuilding-Shorts-Man-Summer-Gym-Workout-Male-Breathable.jpg_220x220xz.jpg_.webp","productPrice":11.719999999999999,"_id":"61b67e59443a8a1e8142ad24","createdAt":"2021-12-12T22:57:29.734Z","updatedAt":"2021-12-12T22:57:29.734Z"},{"productName":"Men Polo Men Shirt Short Sleeve Polo Shirt Chest Three Stripe Color Stitching Top Comfortable Beach Lapel Men's Top Men's Polo","productUrl":"https://www.aliexpress.com/item/1005003101728396.html?algo_pvid=c874a548-621e-498c-9ea2-4b448c58bca5&algo_exp_id=c874a548-621e-498c-9ea2-4b448c58bca5-0&pdp_ext_f=%7B%22sku_id%22%3A%22-1%22%7D","productImage":"https://ae01.alicdn.com/kf/H758f180beffb4faa9530cfa9badce56eO/Men-Polo-Men-Shirt-Short-Sleeve-Polo-Shirt-Chest-Three-Stripe-Color-Stitching-Top-Comfortable-Beach.jpg_220x220xz.jpg_.webp","productPrice":3.632,"_id":"61b67e59443a8a1e8142ad25","createdAt":"2021-12-12T22:57:29.734Z","updatedAt":"2021-12-12T22:57:29.734Z"},{"productName":"New Men chinlon Fitness Bodybuilding Shorts Man Summer Gym Workout Male Breathable Quick Dry Sportswear Jogger Beach Short Pants","productUrl":"https://www.aliexpress.com/item/1005002513155953.html?algo_pvid=c8f3c54e-8b1f-4e82-931f-decb3718552e&aem_p4p_detail=202112051358493294312813045870013098278&algo_exp_id=c8f3c54e-8b1f-4e82-931f-decb3718552e-14&pdp_ext_f=%7B%22sku_id%22%3A%22-1%22%7D","productImage":"https://ae01.alicdn.com/kf/H8deb82f070d0455c96386364579a7531o/New-font-b-Men-b-font-chinlon-Fitness-Bodybuilding-Shorts-Man-Summer-Gym-Workout-Male-Breathable.jpg_220x220xz.jpg_.webp","productPrice":11.719999999999999,"_id":"61b67e59443a8a1e8142ad26","createdAt":"2021-12-12T22:57:29.734Z","updatedAt":"2021-12-12T22:57:29.734Z"},{"productName":"Men Polo Men Shirt Short Sleeve Polo Shirt Chest Three Stripe Color Stitching Top Comfortable Beach Lapel Men's Top Men's Polo","productUrl":"https://www.aliexpress.com/item/1005003101728396.html?algo_pvid=c874a548-621e-498c-9ea2-4b448c58bca5&algo_exp_id=c874a548-621e-498c-9ea2-4b448c58bca5-0&pdp_ext_f=%7B%22sku_id%22%3A%22-1%22%7D","productImage":"https://ae01.alicdn.com/kf/H758f180beffb4faa9530cfa9badce56eO/Men-Polo-Men-Shirt-Short-Sleeve-Polo-Shirt-Chest-Three-Stripe-Color-Stitching-Top-Comfortable-Beach.jpg_220x220xz.jpg_.webp","productPrice":3.632,"_id":"61b67e59443a8a1e8142ad27","createdAt":"2021-12-12T22:57:29.734Z","updatedAt":"2021-12-12T22:57:29.734Z"}],"address":"gulshan ravi lahore","status":"Not Processed","createdAt":"2021-12-12T22:57:29.734Z","updatedAt":"2021-12-12T22:57:29.734Z","__v":0}]
+/// totalOrders : 1
+/// order : [{"_id":"61cde46c61a8d82ec43c327b","userId":"7T0lHIneFhhg89mnguiXhMf7i473","userName":"kashif","phoneNo":"234567888","deliveryMethod":"cod","products":[{"productName":"(Blazer+Pants+Vest) Classic Men Suits Slim Wedding Groom Wear Male Business Casual 3 Piece Suit Trousers Gentlemen Costume M-6XL","productUrl":"https://www.aliexpress.com/item/1005003474136329.html?algo_pvid=c0ffa4fc-7a4a-43f7-9082-4018be262e60&algo_exp_id=c0ffa4fc-7a4a-43f7-9082-4018be262e60-1&pdp_ext_f=%7B%22sku_id%22%3A%2212000025948625266%22%7D","productImage":"https://ae01.alicdn.com/kf/Hf1b931cab57942c5bbf595198bafa2c2V/-Blazer-Pants-Vest-Classic-Men-Suits-Slim-Wedding-Groom-Wear-Male-Business-Casual-3-Piece.jpg_220x220xz.jpg_.webp","productPrice":12,"productId":"61ba9197d2d6bfcb90e3dcf5","_id":"61cde46c61a8d82ec43c327c","createdAt":"2021-12-30T16:55:08.244Z","updatedAt":"2021-12-30T16:55:08.244Z"}],"address":"gulshan ravi lahore","status":"Not Processed","createdAt":"2021-12-30T16:55:08.245Z","updatedAt":"2021-12-30T16:55:08.245Z","__v":0}]
+// ignore_for_file: invalid_assignment
 
 class AllOrdersHistoryModel {
   AllOrdersHistoryModel({
@@ -23,6 +24,7 @@ class AllOrdersHistoryModel {
       });
     }
   }
+
   bool? _success;
   int? _totalOrders;
   List<Order>? _order;
@@ -30,28 +32,18 @@ class AllOrdersHistoryModel {
   bool? get success => _success;
   int? get totalOrders => _totalOrders;
   List<Order>? get order => _order;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['success'] = _success;
-    map['totalOrders'] = _totalOrders;
-    if (_order != null) {
-      map['order'] = _order?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
 }
 
-/// _id : "61b679825a9dfc348d3c7ed8"
-/// userId : "580"
-/// userName : "ksshif"
-/// phoneNo : "031342545"
-/// deliveryMethod : "COD"
-/// products : [{"productName":"watch","productUrl":"https://www.aliexpress.com/item/32952974486.html?algo_pvid=485d65e7-83c5-4514-ac40-c2c267d09587&algo_exp_id=485d65e7-83c5-4514-ac40-c2c267d09587-0&pdp_ext_f=%7B%22sku_id%22%3A%2267346783393%22%7D","productImage":"https://ae01.alicdn.com/kf/H199ee943866548d084f6b49edcf0a69cP/360-Slim-Watch-Cover-for-Apple-Watch-Case-6-SE-5-4-3-2-1-42MM.jpg_220x220xz.jpg_.webp%22,%20%22","productPrice":5,"_id":"61b679825a9dfc348d3c7ed9","createdAt":"2021-12-12T22:36:50.205Z","updatedAt":"2021-12-12T22:36:50.205Z"},{"productName":"watch","productUrl":"https://www.aliexpress.com/item/32952974486.html?algo_pvid=485d65e7-83c5-4514-ac40-c2c267d09587&algo_exp_id=485d65e7-83c5-4514-ac40-c2c267d09587-0&pdp_ext_f=%7B%22sku_id%22%3A%2267346783393%22%7D","productImage":"https://ae01.alicdn.com/kf/H199ee943866548d084f6b49edcf0a69cP/360-Slim-Watch-Cover-for-Apple-Watch-Case-6-SE-5-4-3-2-1-42MM.jpg_220x220xz.jpg_.webp%22,%20%22","productPrice":5,"_id":"61b679825a9dfc348d3c7eda","createdAt":"2021-12-12T22:36:50.205Z","updatedAt":"2021-12-12T22:36:50.205Z"}]
-/// address : "ravi road lahore"
+/// _id : "61cde46c61a8d82ec43c327b"
+/// userId : "7T0lHIneFhhg89mnguiXhMf7i473"
+/// userName : "kashif"
+/// phoneNo : "234567888"
+/// deliveryMethod : "cod"
+/// products : [{"productName":"(Blazer+Pants+Vest) Classic Men Suits Slim Wedding Groom Wear Male Business Casual 3 Piece Suit Trousers Gentlemen Costume M-6XL","productUrl":"https://www.aliexpress.com/item/1005003474136329.html?algo_pvid=c0ffa4fc-7a4a-43f7-9082-4018be262e60&algo_exp_id=c0ffa4fc-7a4a-43f7-9082-4018be262e60-1&pdp_ext_f=%7B%22sku_id%22%3A%2212000025948625266%22%7D","productImage":"https://ae01.alicdn.com/kf/Hf1b931cab57942c5bbf595198bafa2c2V/-Blazer-Pants-Vest-Classic-Men-Suits-Slim-Wedding-Groom-Wear-Male-Business-Casual-3-Piece.jpg_220x220xz.jpg_.webp","productPrice":12,"productId":"61ba9197d2d6bfcb90e3dcf5","_id":"61cde46c61a8d82ec43c327c","createdAt":"2021-12-30T16:55:08.244Z","updatedAt":"2021-12-30T16:55:08.244Z"}]
+/// address : "gulshan ravi lahore"
 /// status : "Not Processed"
-/// createdAt : "2021-12-12T22:36:50.205Z"
-/// updatedAt : "2021-12-12T22:36:50.205Z"
+/// createdAt : "2021-12-30T16:55:08.245Z"
+/// updatedAt : "2021-12-30T16:55:08.245Z"
 /// __v : 0
 
 class Order {
@@ -97,8 +89,8 @@ class Order {
     _status = json['status'];
     _createdAt = json['createdAt'];
     _updatedAt = json['updatedAt'];
-    _v = json['__v'];
   }
+
   String? _id;
   String? _userId;
   String? _userName;
@@ -142,20 +134,22 @@ class Order {
   }
 }
 
-/// productName : "watch"
-/// productUrl : "https://www.aliexpress.com/item/32952974486.html?algo_pvid=485d65e7-83c5-4514-ac40-c2c267d09587&algo_exp_id=485d65e7-83c5-4514-ac40-c2c267d09587-0&pdp_ext_f=%7B%22sku_id%22%3A%2267346783393%22%7D"
-/// productImage : "https://ae01.alicdn.com/kf/H199ee943866548d084f6b49edcf0a69cP/360-Slim-Watch-Cover-for-Apple-Watch-Case-6-SE-5-4-3-2-1-42MM.jpg_220x220xz.jpg_.webp%22,%20%22"
-/// productPrice : 5
-/// _id : "61b679825a9dfc348d3c7ed9"
-/// createdAt : "2021-12-12T22:36:50.205Z"
-/// updatedAt : "2021-12-12T22:36:50.205Z"
+/// productName : "(Blazer+Pants+Vest) Classic Men Suits Slim Wedding Groom Wear Male Business Casual 3 Piece Suit Trousers Gentlemen Costume M-6XL"
+/// productUrl : "https://www.aliexpress.com/item/1005003474136329.html?algo_pvid=c0ffa4fc-7a4a-43f7-9082-4018be262e60&algo_exp_id=c0ffa4fc-7a4a-43f7-9082-4018be262e60-1&pdp_ext_f=%7B%22sku_id%22%3A%2212000025948625266%22%7D"
+/// productImage : "https://ae01.alicdn.com/kf/Hf1b931cab57942c5bbf595198bafa2c2V/-Blazer-Pants-Vest-Classic-Men-Suits-Slim-Wedding-Groom-Wear-Male-Business-Casual-3-Piece.jpg_220x220xz.jpg_.webp"
+/// productPrice : 12
+/// productId : "61ba9197d2d6bfcb90e3dcf5"
+/// _id : "61cde46c61a8d82ec43c327c"
+/// createdAt : "2021-12-30T16:55:08.244Z"
+/// updatedAt : "2021-12-30T16:55:08.244Z"
 
 class Products {
   Products({
     String? productName,
     String? productUrl,
     String? productImage,
-    dynamic? productPrice,
+    int? productPrice,
+    String? productId,
     String? id,
     String? createdAt,
     String? updatedAt,
@@ -164,6 +158,7 @@ class Products {
     _productUrl = productUrl;
     _productImage = productImage;
     _productPrice = productPrice;
+    _productId = productId;
     _id = id;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
@@ -174,6 +169,7 @@ class Products {
     _productUrl = json['productUrl'];
     _productImage = json['productImage'];
     _productPrice = json['productPrice'];
+    _productId = json['productId'];
     _id = json['_id'];
     _createdAt = json['createdAt'];
     _updatedAt = json['updatedAt'];
@@ -181,7 +177,8 @@ class Products {
   String? _productName;
   String? _productUrl;
   String? _productImage;
-  dynamic? _productPrice;
+  int? _productPrice;
+  String? _productId;
   String? _id;
   String? _createdAt;
   String? _updatedAt;
@@ -189,7 +186,8 @@ class Products {
   String? get productName => _productName;
   String? get productUrl => _productUrl;
   String? get productImage => _productImage;
-  dynamic? get productPrice => _productPrice;
+  int? get productPrice => _productPrice;
+  String? get productId => _productId;
   String? get id => _id;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
@@ -200,6 +198,7 @@ class Products {
     map['productUrl'] = _productUrl;
     map['productImage'] = _productImage;
     map['productPrice'] = _productPrice;
+    map['productId'] = _productId;
     map['_id'] = _id;
     map['createdAt'] = _createdAt;
     map['updatedAt'] = _updatedAt;
